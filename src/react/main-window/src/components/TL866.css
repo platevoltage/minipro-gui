@@ -1,0 +1,42 @@
+.body {
+    position: relative;
+    background-color: #999999;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+
+.zif {
+    position: absolute;
+    background-color: #19818b;
+    height: 70%;
+    width: 40%;
+    margin-left:20%;
+    margin-top: 10%;
+    border-radius: 4px;
+    display: flex;
+}
+
+.pin-row {
+    background-color: #00000022;
+    position: absolute;
+    height: 75%;
+    width: 30%;
+    bottom: 5%;
+}
+
+.pin-row.left {
+    left: 10%;
+}
+.pin-row.right {
+    right: 10%;
+}
+
+.pin {
+    background-color: #000000dd;
+    position: relative;
+    width: 100%;
+    height: 3%;
+    margin-bottom: 13%;
+
+}

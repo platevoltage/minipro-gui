@@ -7,10 +7,7 @@ const exec = util.promisify(child_process.exec);
 
 app.whenReady().then(() => {
 
-  
     const win = createMainWindow();
-    
-    
 });
 
 const createMainWindow = () => {
@@ -19,6 +16,7 @@ const createMainWindow = () => {
       height: 720,
       minHeight: 200,
       minWidth: 600,
+      backgroundColor: 'black',
     //   title: "Transmission",
     //   frame: !isMac,
     //   titleBarStyle: isMac ? "hidden" : "default",

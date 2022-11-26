@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run build && electron --inspect=5858  --remote-debugging-port=9222 .",
     "build:react": "cd src/react/main-window && npm run build",
+    "start:react": "cd src/react/main-window && npm start",
     "build": "tsc && rm -Rf dist/public && cp -R src/public dist/ && npm run build:react",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
