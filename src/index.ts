@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, Menu, safeStorage } from 'electron';
 import * as util from 'util';
 import * as child_process from 'child_process';
+import * as path from 'path';
 
 const exec = util.promisify(child_process.exec);
 
@@ -27,7 +28,7 @@ const createMainWindow = () => {
         // preload: path.join(__dirname, 'mainWindowPreload.js')
       }
     });
-
+    win.loadFile(path.join(__dirname, './public/main-window/index.html')) 
     return win;
 }
 

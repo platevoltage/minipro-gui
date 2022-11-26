@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "npm run build && electron --inspect=5858  --remote-debugging-port=9222 .",
-    "build": "tsc && rm -Rf dist/public && cp -R src/public dist/",
+    "build:react": "cd src/react/main-window && npm run build",
+    "build": "tsc && rm -Rf dist/public && cp -R src/public dist/ && npm run build:react",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
