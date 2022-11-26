@@ -1,10 +1,13 @@
 .body {
     position: relative;
     background-color: #999999;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     border-radius: 6px;
+    box-shadow: 0px 0px 0px 2px #00000033, 0px 0px 0px 10px #999999;
+    
 }
+
 
 .zif {
     position: absolute;
@@ -40,3 +43,21 @@
     margin-bottom: 13%;
 
 }
+
+.vents {
+    position: absolute;
+    background-color: #999999;
+    width: 10%;
+    height: 16%;
+    left: -10px;
+    bottom: 10%;  
+}
+.vent {
+    background-color: #000000aa;
+    position: relative;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 20%;
+    border-radius: 0px 2px 2px 0px;
+}
+

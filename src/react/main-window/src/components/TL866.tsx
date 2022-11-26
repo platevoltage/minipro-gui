@@ -17,6 +17,13 @@ export default function TL866() {
                 <div className="pin" key={index}></div>
             )}
         </div>
+
+      </div>
+
+      <div className="vents">
+            {[...Array(6)].map((pin, index) =>
+                <div className="vent" key={index}></div>
+            )}
       </div>
     </div>
   )
