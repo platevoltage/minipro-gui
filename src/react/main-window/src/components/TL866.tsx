@@ -8,12 +8,12 @@ export default function TL866() {
     <div className="body">
       <div className="zif">
         <div className="pin-row left">
-            {[...Array(20)].map((pin, index) =>
+            {[...Array(20)].map((_, index) =>
                 <div className="pin" key={index}></div>
             )}
         </div>
         <div className="pin-row right">
-            {[...Array(20)].map((pin, index) =>
+            {[...Array(20)].map((_, index) =>
                 <div className="pin" key={index}></div>
             )}
         </div>
@@ -21,7 +21,7 @@ export default function TL866() {
       </div>
 
       <div className="vents">
-            {[...Array(6)].map((pin, index) =>
+            {[...Array(6)].map((_, index) =>
                 <div className="vent" key={index}></div>
             )}
       </div>
