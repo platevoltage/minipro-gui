@@ -17,6 +17,9 @@ export default function TL866() {
                 <div className="pin" key={index}></div>
             )}
         </div>
+        <div className="chip">
+            <div className="notch"></div>   
+        </div>
 
       </div>
 
