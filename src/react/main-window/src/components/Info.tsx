@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 import { getSupportedDevices, readDevice } from '../utils/api';
+import { IOptions } from './Options';
 import './Info.css';
 
 interface Props {
   setHexEditorFile: Function;
   setTerminalText: Function;
   terminalText: string;
+  options: IOptions;
 }
 
-export default function Info({setHexEditorFile, setTerminalText, terminalText}: Props) {
+export default function Info({setHexEditorFile, setTerminalText, terminalText, options}: Props) {
   const [devices, setDevices] = useState([]);
   const [filteredDevices, setFilteredDevices] = useState([]);
   const [filter, setFilter] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("");
-  const [isForced, setIsForced] = useState(false);
 
   useEffect(() => {
     getSupportedDevices(setDevices, setSelectedDevice);
@@ -41,10 +42,9 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText}: 
 
         <input type="text" onChange={(e) => setFilter(e.target.value)}></input>
 
-        <button onClick={() => readDevice(selectedDevice, isForced, setHexEditorFile, setTerminalText, terminalText)}>Read</button>
+        <button onClick={() => readDevice(selectedDevice, options.isForced, setHexEditorFile, setTerminalText, terminalText)}>Read</button>
 
-      <input type="checkbox" id="force" name="force" value="true" onChange={(e) => setIsForced(e.target.checked)}/>
-      <label htmlFor="force">Force</label>
+
 
 
 
