@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { getSupportedDevices, readDevice } from '../utils/api';
 import './Info.css';
 
 interface Props {
@@ -12,15 +13,15 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText}: 
   const [filter, setFilter] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("");
   const [isForced, setIsForced] = useState(false);
+
+  useEffect(() => {
+    getSupportedDevices(setDevices, setSelectedDevice);
+  }, [])
   
 
   return (
     <div className="info-container">
-        <button onClick={() => {
-            window.api.getSupportedDevices().then((result: any) => {
-              setDevices(result.stdout.split("\n"));
-            });
-        }}>Refresh Devices</button>
+        <button onClick={() => getSupportedDevices(setDevices, setSelectedDevice)}>Refresh Devices</button>
  
         <select id="chip-select" name="chip-select" onChange={(e) => setSelectedDevice(e.target.value)}>
           <>{ 
@@ -33,31 +34,11 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText}: 
           }</>
         </select>
 
-        <input type="text" onChange={(e) => {
-          e.preventDefault();
-          setFilter(e.target.value);
-        }}>
+        <input type="text" onChange={(e) => setFilter(e.target.value)}></input>
 
-        </input>
+        <button onClick={() => readDevice(selectedDevice, isForced, setHexEditorFile, setTerminalText, terminalText)}>Read</button>
 
-        <button onClick={() => {
-            window.api.readData(selectedDevice, isForced).then((result: any) => {
-                let newText = "";
-                console.log(result);
-                newText +=  result.execString + "\n";
-                if (!("err" in result)) {
-                    setHexEditorFile(result.file);
-                    newText += "done \n";
-                } else {
-                    newText += result.err + "\n";
-                }
-                setTerminalText(terminalText + newText);
-              });
-        }}>Read</button>
-
-      <input type="checkbox" id="force" name="force" value="true" onChange={(e) => {
-        setIsForced(e.target.checked);
-      }}/>
+      <input type="checkbox" id="force" name="force" value="true" onChange={(e) => setIsForced(e.target.checked)}/>
       <label htmlFor="force">Force</label>
 
 
