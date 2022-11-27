@@ -2,12 +2,19 @@ import { app, BrowserWindow, ipcMain, Menu, safeStorage } from 'electron';
 import * as util from 'util';
 import * as child_process from 'child_process';
 import * as path from 'path';
+import * as fs from 'fs';
 
 const exec = util.promisify(child_process.exec);
 
 app.whenReady().then(() => {
 
     const win = createMainWindow();
+    ipcMain.handle("readData", async () => {
+      console.log("readTry")
+      return readDevice("SST27SF512@DIP28");
+      
+    });
+
 });
 
 const createMainWindow = () => {
@@ -23,10 +30,11 @@ const createMainWindow = () => {
       webPreferences: {
         enableBlinkFeatures: "CSSColorSchemeUARendering",
         devTools: false,
-        // preload: path.join(__dirname, 'mainWindowPreload.js')
+        preload: path.join(__dirname, 'mainPreload.js')
       }
     });
-    win.loadFile(path.join(__dirname, './public/main-window/index.html')) 
+    // win.loadFile(path.join(__dirname, './public/main-window/index.html')) 
+    win.loadURL('http://localhost:3000')
     return win;
 }
 
@@ -40,5 +48,23 @@ async function getDeviceInfo(device: string) {
     console.log(stderr);
 }
 
-getDeviceInfo("SST29SF512");
+async function readDevice(device: string) {
+  const { stderr } = await exec(`minipro -p ${device} -r test.hex -y`);
+  const file = await readFile("test.hex");
+  return file;
+
+}
+
+async function readFile(path: string, encoding?: BufferEncoding | null) {
+  try {
+    const data = await fs.promises.readFile(path, { encoding })
+    return data;
+  }
+  catch (err) {
+    console.error(err)
+    return null;
+  }
+}
+
+
 // listDevices();
