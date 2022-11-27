@@ -8,6 +8,8 @@ interface Props {
 
 export default function Info({setTerminalText, terminalText}: Props) {
   const [devices, setDevices] = useState([]);
+  const [filter, setFilter] = useState("");
+  
 
   return (
     <div className="info-container">
@@ -15,14 +17,25 @@ export default function Info({setTerminalText, terminalText}: Props) {
             window.api.getSupportedDevices().then((result: any) => {
               setDevices(result.stdout.split("\n"));
             });
-        }}>Get Supported Devices</button>
+        }}>Refresh Devices</button>
  
         <select id="chip-select" name="chip-select">
-          <>{ devices.map((device: any, index: number) => {
+          <>{ devices.filter((device: string) => {
+              return device.includes(filter); 
+            }).map((device: any, index: number) => {
               return <option key={index} value={device}>{device}</option>
             })
           }</>
         </select>
+
+        <input type="text" onChange={(e) => {
+          e.preventDefault();
+          setFilter(e.target.value);
+        }}>
+
+        </input>
+
+
 
     </div>
   )
