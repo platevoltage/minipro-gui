@@ -27,7 +27,7 @@ function App() {
   return (
     <main>
       <Nav setHexEditorFile={setHexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText}/>
-      <Info />
+      <Info setTerminalText={setTerminalText} terminalText={terminalText}/>
       <div className="row">
         <HexWindow file={hexEditorFile}/>
         <TerminalWindow text={terminalText}/>

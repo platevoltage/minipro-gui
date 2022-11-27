@@ -10,9 +10,10 @@ app.whenReady().then(() => {
 
     const win = createMainWindow();
     ipcMain.handle("readData", async () => {
-      console.log("readTry")
       return readDevice("SST27SF512@DIP28");
-      
+    });
+    ipcMain.handle("getSupportedDevices", async () => {
+      return listDevices();
     });
 
 });
@@ -41,6 +42,7 @@ const createMainWindow = () => {
 async function listDevices() {
     const { stdout } = await exec(`minipro -l -q TL866A`);
     console.log(stdout);
+    return { stdout };
 }
 
 async function getDeviceInfo(device: string) {
