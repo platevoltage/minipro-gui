@@ -7,10 +7,11 @@ interface Props {
   setHexEditorFile: Function;
   setTerminalText: Function;
   terminalText: string;
+  setOptions: Function;
   options: IOptions;
 }
 
-export default function Info({setHexEditorFile, setTerminalText, terminalText, options}: Props) {
+export default function Info({setHexEditorFile, setTerminalText, terminalText, setOptions, options}: Props) {
   const [devices, setDevices] = useState([]);
   const [filteredDevices, setFilteredDevices] = useState([]);
   const [filter, setFilter] = useState("");
@@ -21,11 +22,13 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, o
   }, []);
 
   useEffect(() => {
-    setFilteredDevices(devices.filter((device: string) => {
+    const _filteredDevices = devices.filter((device: string) => {
       return device.toLowerCase().includes(filter.toLowerCase()); 
-    }));
-    setSelectedDevice(filteredDevices[0]);
-  }, [devices, filter, filteredDevices]);
+    });
+    setFilteredDevices(_filteredDevices);
+    setSelectedDevice(_filteredDevices[0]);
+    setOptions({...options, selectedDevice: _filteredDevices[0]});
+  }, [devices, filter]);
   
 
   return (

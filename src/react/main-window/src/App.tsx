@@ -21,6 +21,7 @@ function App() {
   );
   const [terminalText, setTerminalText] = useState("");
   const [options, setOptions] = useState<IOptions>({
+    selectedDevice: "",
     isForced: true,
   });
 
@@ -31,10 +32,13 @@ function App() {
     <main>
 
       <Nav setHexEditorFile={setHexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText}/>
-      <Info setHexEditorFile={setHexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText} options={options}/>
+      <Info setHexEditorFile={setHexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText} setOptions={setOptions} options={options}/>
       <div className="row">
         <HexWindow file={hexEditorFile}/>
         <TerminalWindow text={terminalText}/>
+        <div className="programmer-container">
+          <TL866 selectedDevice={options.selectedDevice}/>
+        </div>
       </div>
       <Options options={options} setOptions={setOptions}/>
       {/* <div className="programmer-container"> */}

@@ -8,7 +8,8 @@ interface Props {
 }
 
 export interface IOptions {
-  isForced: boolean
+  isForced: boolean,
+  selectedDevice: string
 }
 
 export default function Options({options, setOptions}:Props) {

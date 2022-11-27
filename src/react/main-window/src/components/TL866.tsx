@@ -1,9 +1,11 @@
 import React from 'react'
 import "./TL866.css";
 
+interface Props {
+  selectedDevice: string;
+}
 
-
-export default function TL866() {
+export default function TL866({selectedDevice}:Props) {
   return (
     <div className="body">
       <div className="zif">
@@ -18,7 +20,10 @@ export default function TL866() {
             )}
         </div>
         <div className="chip">
+
             <div className="notch"></div>   
+      
+            <div className="label">{selectedDevice}</div>
         </div>
 
       </div>
