@@ -2,7 +2,7 @@
     height: 100px;
     width: 100%;
     background-color: #ffffff22;
-    position: absolute;
+    position: static;
     bottom: 0;
 
 }

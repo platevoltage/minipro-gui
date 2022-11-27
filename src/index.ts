@@ -49,10 +49,15 @@ async function getDeviceInfo(device: string) {
 }
 
 async function readDevice(device: string) {
-  const { stdout, stderr } = await exec(`minipro -p ${device} -r test.hex -y`);
-  const file = await readFile("test.hex");
-  return {stdout, stderr, file};
-
+  const execString = `minipro -p ${device} -r test.hex -y`
+  try {
+    const { stdout, stderr } = await exec(execString);
+    const file = await readFile("test.hex");
+    return {stdout, stderr, file, execString};
+  } catch(err) {
+    return { err, execString };
+  }
+    
 }
 
 async function readFile(path: string, encoding?: BufferEncoding | null) {

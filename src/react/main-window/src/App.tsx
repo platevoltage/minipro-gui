@@ -19,22 +19,18 @@ function App() {
   const [hexEditorFile, setHexEditorFile] = useState(
     Buffer.allocUnsafe(512).fill(Buffer.from('00','hex'))
   );
+  const [terminalText, setTerminalText] = useState("");
 
 
-  useEffect(() => {
-    //temporary
-    window.api.readData().then((result: any) => setHexEditorFile(result));
-
-  },[])
 
 
   return (
     <main>
-      <Nav />
+      <Nav setHexEditorFile={setHexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText}/>
       <Info />
       <div className="row">
         <HexWindow file={hexEditorFile}/>
-        <TerminalWindow />
+        <TerminalWindow text={terminalText}/>
       </div>
       <Options />
       {/* <div className="programmer-container"> */}
