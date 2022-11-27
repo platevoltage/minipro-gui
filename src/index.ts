@@ -9,8 +9,9 @@ const exec = util.promisify(child_process.exec);
 app.whenReady().then(() => {
 
     const win = createMainWindow();
-    ipcMain.handle("readData", async () => {
-      return readDevice("SST27SF512@DIP28");
+    ipcMain.handle("readData", async (_, device, force) => {
+      console.log(device, force)
+      return readDevice(device, force);
     });
     ipcMain.handle("getSupportedDevices", async () => {
       return listDevices();
@@ -50,8 +51,8 @@ async function getDeviceInfo(device: string) {
     console.log(stderr);
 }
 
-async function readDevice(device: string) {
-  const execString = `minipro -p ${device} -r test.hex -y`
+async function readDevice(device: string, force?: boolean) {
+  const execString = `minipro -p ${device} -r test.hex ${force? "-y" : ""}`
   try {
     const { stdout, stderr } = await exec(execString);
     const file = await readFile("test.hex");

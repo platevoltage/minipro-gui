@@ -4,6 +4,6 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 
 contextBridge.exposeInMainWorld("api", {
-    readData: () => ipcRenderer.invoke('readData'),
+    readData: (device: string, force?: boolean) => ipcRenderer.invoke('readData', device, force),
     getSupportedDevices: () => ipcRenderer.invoke('getSupportedDevices'),
 });
