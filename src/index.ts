@@ -49,9 +49,9 @@ async function getDeviceInfo(device: string) {
 }
 
 async function readDevice(device: string) {
-  const { stderr } = await exec(`minipro -p ${device} -r test.hex -y`);
+  const { stdout, stderr } = await exec(`minipro -p ${device} -r test.hex -y`);
   const file = await readFile("test.hex");
-  return file;
+  return {stdout, stderr, file};
 
 }
 
