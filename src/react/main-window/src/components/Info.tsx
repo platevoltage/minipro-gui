@@ -25,7 +25,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText}: 
         <select id="chip-select" name="chip-select" onChange={(e) => setSelectedDevice(e.target.value)}>
           <>{ 
             devices.filter((device: string) => {
-                return device.includes(filter); 
+                return device.toLowerCase().includes(filter.toLowerCase()); 
             })
               .map((device: any, index: number) => {
                 return <option key={index} value={device}>{device}</option>
