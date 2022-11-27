@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import HexEditor from 'react-hex-editor';
 import oneDarkPro from 'react-hex-editor/themes/oneDarkPro';
+import './HexWindow.css';
 
 interface Props {
   file: Uint8Array;
@@ -20,7 +21,8 @@ export default function HexWindow({ file }: Props) {
     }, [data]);
 
   return (
-    
+    <div className="hex-window-container">
+
         <HexEditor
             // columns={0x10}
             data={data}
@@ -29,7 +31,8 @@ export default function HexWindow({ file }: Props) {
             theme={{ hexEditor: oneDarkPro }}
             showAscii={true}
             showRowLabels={true}
-        />
+            />
+    </div>
     
   )
 }
