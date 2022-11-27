@@ -10,13 +10,21 @@ interface Props {
 
 export default function Info({setHexEditorFile, setTerminalText, terminalText}: Props) {
   const [devices, setDevices] = useState([]);
+  const [filteredDevices, setFilteredDevices] = useState([]);
   const [filter, setFilter] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("");
   const [isForced, setIsForced] = useState(false);
 
   useEffect(() => {
     getSupportedDevices(setDevices, setSelectedDevice);
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    setFilteredDevices(devices.filter((device: string) => {
+      return device.toLowerCase().includes(filter.toLowerCase()); 
+    }));
+    setSelectedDevice(filteredDevices[0]);
+  }, [devices, filter, filteredDevices]);
   
 
   return (
@@ -25,10 +33,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText}: 
  
         <select id="chip-select" name="chip-select" onChange={(e) => setSelectedDevice(e.target.value)}>
           <>{ 
-            devices.filter((device: string) => {
-                return device.toLowerCase().includes(filter.toLowerCase()); 
-            })
-              .map((device: any, index: number) => {
+              filteredDevices.map((device: any, index: number) => {
                 return <option key={index} value={device}>{device}</option>
               })
           }</>
