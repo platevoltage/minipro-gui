@@ -12,7 +12,9 @@ declare global {
 }
 
 function App() {
-  const [hexEditorFile, setHexEditorFile] = useState(Buffer.from("test"));
+  const [hexEditorFile, setHexEditorFile] = useState(
+    Buffer.allocUnsafe(512).fill(Buffer.from('00','hex'))
+  );
 
   
   useEffect(() => {
