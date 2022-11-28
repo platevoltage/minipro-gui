@@ -49,6 +49,10 @@ export function readDevice(selectedDevice: string, isForced: boolean, setHexEdit
     });
 }
 
+export function saveFile(file: Buffer) {
+    window.api.saveFile(file).then((result: any) => {});
+}
+
 function parseJSON(input: string) {
     const lines = input.split("\n");
     const object = Object();

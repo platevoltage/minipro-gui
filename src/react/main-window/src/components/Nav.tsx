@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import './Nav.css';
+import { saveFile } from '../utils/api'
 
 
 interface Props {
@@ -43,11 +44,7 @@ export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, t
         }}>
       </input>
       
-      <button onClick={ 
-        () => window.api.saveFile(hexEditorFile).then((result: any) => {
-
-        })}
-      >Save</button>
+      <button onClick={() => saveFile(hexEditorFile)}>Save</button>
 
 
 
