@@ -54,7 +54,7 @@
 
 .occupied-pin {
     background-color: #8b7e5a;
-    height: 100%;
+    height: 80%;
     width: 58%;
 }
 .occupied-pin.DIP32,
