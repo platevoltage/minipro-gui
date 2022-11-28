@@ -23,7 +23,7 @@ export default function TL866({options}:Props) {
         {options.selectedDevice && <div className={`chip ${options.chipInfo?.Package}`}>
 
             <div className="notch"></div>   
-      
+            <div className="dot"></div>   
             <div className="label">{options.selectedDevice.split("@")[0]}</div>
         </div>}
 

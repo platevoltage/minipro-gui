@@ -104,13 +104,25 @@
 
 .notch {
     position: absolute;
-    background-color: #19818b6e;
+    background-color: #19818b;
     width: 16%;
-    height: 5px;
-    border-radius: 0px 0px 4px 4px;
+    height: 3px;
+    border-radius: 0px 0px 3px 3px;
 }
+
+.dot {
+    position: absolute;
+    background-color: #00000055;
+    border: 1px solid #00000099;
+    width: .6em;
+    height: .6em;
+    border-radius: 10px;
+    left: 10%;
+    top: 6%;
+}
+
 .label {
-    color: #ffffff;
+    color: #ffffff99;
     position: absolute;
     /* top: 40%; */
     text-align: center;
