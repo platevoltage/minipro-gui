@@ -16,7 +16,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
   const [filteredDevices, setFilteredDevices] = useState([]);
   const [filter, setFilter] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("");
-  const [chipInfo, setChipInfo] = useState({});
+
 
   useEffect(() => {
     getSupportedDevices(setDevices, setSelectedDevice);
@@ -26,7 +26,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
     (async() => {
       if (selectedDevice) {
         const chipInfo = await getInfo(selectedDevice)
-        setChipInfo(chipInfo);
+
         setOptions({...options, selectedDevice: selectedDevice, chipInfo});
       } else {
         setOptions({...options, selectedDevice: selectedDevice, chipInfo: null});
@@ -44,7 +44,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
     (async() => {
       if (selectedDevice) {
         const chipInfo = await getInfo(selectedDevice)
-        setChipInfo(chipInfo);
+
         setOptions({...options, selectedDevice: _selectedDevice, chipInfo});
       } else {
         setOptions({...options, selectedDevice: _selectedDevice, chipInfo: null});
