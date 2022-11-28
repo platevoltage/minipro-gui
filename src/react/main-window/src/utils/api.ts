@@ -1,3 +1,5 @@
+import { parseConfigFileTextToJson } from "typescript";
+
 export function getSupportedDevices(setDevices: Function, setSelectedDevice: Function) {
     window.api.getSupportedDevices().then((result: any) => {
         const deviceList = result.stdout.split("\n")
@@ -6,21 +8,29 @@ export function getSupportedDevices(setDevices: Function, setSelectedDevice: Fun
     }); 
 }
 
-export function getInfo(selectedDevice: string, setTerminalText: Function, terminalText: string) {
-    window.api.getInfo(selectedDevice).then((result: any) => {
+export function getPackageType(device: string) {
+    const packageType = getInfo(device)
+    console.log( packageType );
+}
+
+export async function getInfo(selectedDevice: string, setTerminalText?: Function, terminalText?: string) {
+    return window.api.getInfo(selectedDevice).then((result: any) => {
         let newText = "";
         const info = result.stderr;
-        // const deviceList = result.stdout.split("\n")
-        // setSelectedDevice(deviceList[0]);
+
         newText +=  result.execString + "\n" + info + "\n";
         if (!("err" in result)) {
-            // setHexEditorFile(result.file);
             newText += "done \n\n";
+            if (setTerminalText) setTerminalText(terminalText + newText);
+            return parseJSON(info);
         } else {
             newText += result.err + "\n";
+            if (setTerminalText) setTerminalText(terminalText + newText);
+            return "error";
         }
-        setTerminalText(terminalText + newText);
+
     }); 
+
 }
 
 export function readDevice(selectedDevice: string, isForced: boolean, setHexEditorFile: Function, setTerminalText: Function, terminalText: string) {
@@ -36,4 +46,16 @@ export function readDevice(selectedDevice: string, isForced: boolean, setHexEdit
         }
         setTerminalText(terminalText + newText);
     });
+}
+
+function parseJSON(input: string) {
+    const lines = input.split("\n");
+    const object = Object();
+    for (let line of lines) {
+        const keyValuePair = line.split(":");
+        const key = keyValuePair[0];
+        const value = keyValuePair[1];
+        object[key as keyof typeof object] = value;
+    }
+    return object;
 }

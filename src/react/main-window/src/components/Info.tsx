@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getSupportedDevices, readDevice, getInfo } from '../utils/api';
+import { getSupportedDevices, readDevice, getInfo, getPackageType } from '../utils/api';
 import { IOptions } from './Options';
 import './Info.css';
 
@@ -47,7 +47,11 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
 
         <button onClick={() => readDevice(selectedDevice, options.isForced, setHexEditorFile, setTerminalText, terminalText)}>Read</button>
 
-        <button onClick={() => getInfo(selectedDevice, setTerminalText, terminalText)}>Info</button>
+        <button onClick={async () => {
+          console.log(await getInfo(selectedDevice, setTerminalText, terminalText))
+          
+          }}>Info</button>
+
 
 
 
