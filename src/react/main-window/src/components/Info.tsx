@@ -21,25 +21,6 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
   useEffect(() => {
     getSupportedDevices(setDevices, setSelectedDevice);
   }, []);
-
-  useEffect(() => {
-    const _filteredDevices = devices.filter((device: string) => {
-      return device.toLowerCase().includes(filter.toLowerCase()); 
-    });
-    const _selectedDevice = _filteredDevices[0];
-    setFilteredDevices(_filteredDevices);
-    setSelectedDevice(_selectedDevice);
-    (async() => {
-      if (_selectedDevice) {
-        const chipInfo = await getInfo(selectedDevice, setTerminalText, terminalText)
-        setChipInfo(chipInfo);
-        setOptions({...options, selectedDevice: _selectedDevice, chipInfo});
-      } else {
-        setOptions({...options, selectedDevice: _selectedDevice, chipInfo: null});
-      }
-    })();
-  }, [devices, filter]);
-
   useEffect(() => {
     (async() => {
       if (selectedDevice) {
@@ -52,22 +33,43 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
     })();
   }, [selectedDevice]);
   
-
+  useEffect(() => {
+    const _filteredDevices = devices.filter((device: string) => {
+      return device.toLowerCase().includes(filter.toLowerCase()); 
+    });
+    const _selectedDevice = _filteredDevices[0];
+    setFilteredDevices(_filteredDevices);
+    setSelectedDevice(_selectedDevice);
+    (async() => {
+      if (selectedDevice) {
+        const chipInfo = await getInfo(selectedDevice, setTerminalText, terminalText)
+        setChipInfo(chipInfo);
+        setOptions({...options, selectedDevice: _selectedDevice, chipInfo});
+      } else {
+        setOptions({...options, selectedDevice: _selectedDevice, chipInfo: null});
+      }
+    })();
+  }, [devices, filter]);
+  
   return (
     <div className="info-container">
         <button onClick={() => getSupportedDevices(setDevices, setSelectedDevice)}>Refresh Devices</button>
  
-        <select id="chip-select" name="chip-select" onChange={(e) => setSelectedDevice(e.target.value)}>
-          <>{ 
-              filteredDevices.map((device: any, index: number) => {
-                return <option key={index} value={device}>{device}</option>
-              })
+        <select id="chip-select" name="chip-select" onChange={(e) => setSelectedDevice(e.target.value)} value={selectedDevice}>
+          <>{ filteredDevices.length>0 ?
+
+                filteredDevices.map((device: any, index: number) => {
+                  return <option key={index} value={device}>{device}</option>
+                })
+                :
+                <option>No Matches</option>
+
           }</>
         </select>
 
         <input type="text" onChange={(e) => setFilter(e.target.value)}></input>
 
-        <button onClick={() => readDevice(selectedDevice, options.isForced, setHexEditorFile, setTerminalText, terminalText)}>Read</button>
+        <button disabled={!!!selectedDevice} onClick={() => readDevice(selectedDevice, options.isForced, setHexEditorFile, setTerminalText, terminalText)}>Read</button>
 
         <button onClick={async () => {
           console.log(await getInfo(selectedDevice, setTerminalText, terminalText))
