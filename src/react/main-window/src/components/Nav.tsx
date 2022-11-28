@@ -4,12 +4,15 @@ import './Nav.css';
 
 interface Props {
     setHexEditorFile: Function;
+    hexEditorFile: Buffer;
     setTerminalText: Function;
     terminalText: string;
 }
 
-export default function Nav({setHexEditorFile, setTerminalText, terminalText}: Props) {
+
+export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, terminalText}: Props) {
   const fileUploadRef = useRef<HTMLInputElement>(null);
+  
 
   return (
     <div className="nav-container">
@@ -39,6 +42,14 @@ export default function Nav({setHexEditorFile, setTerminalText, terminalText}: P
         }
         }}>
       </input>
+      
+      <button onClick={ 
+        () => window.api.saveFile(hexEditorFile).then((result: any) => {
+
+        })}
+      >Save</button>
+
+
 
     </div>
   )

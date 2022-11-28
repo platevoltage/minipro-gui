@@ -1,4 +1,4 @@
-import { parseConfigFileTextToJson } from "typescript";
+
 
 export function getSupportedDevices(setDevices: Function, setSelectedDevice: Function) {
     window.api.getSupportedDevices().then((result: any) => {

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu, safeStorage } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, safeStorage, dialog } from 'electron';
 import * as util from 'util';
 import * as child_process from 'child_process';
 import * as path from 'path';
@@ -19,6 +19,12 @@ app.whenReady().then(() => {
     ipcMain.handle("getInfo", async (_, device) => {
       return getDeviceInfo(device);
     });
+    ipcMain.handle("saveFile", async (_, file) => {
+      const savePath = await dialog.showSaveDialog(win, { defaultPath: "Untitled.hex"});
+      console.log(savePath)
+      saveFile(savePath.filePath, file)
+    });
+
 
 });
 
@@ -71,6 +77,17 @@ async function readDevice(device: string, force?: boolean) {
 async function readFile(path: string, encoding?: BufferEncoding | null) {
   try {
     const data = await fs.promises.readFile(path, { encoding })
+    return data;
+  }
+  catch (err) {
+    console.error(err)
+    return null;
+  }
+}
+
+async function saveFile(path: string, file: Buffer, encoding?: BufferEncoding | null) {
+  try {
+    const data = await fs.promises.writeFile(path, file, { encoding })
     return data;
   }
   catch (err) {
