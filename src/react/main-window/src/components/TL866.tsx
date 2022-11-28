@@ -19,12 +19,12 @@ export default function TL866({selectedDevice}:Props) {
                 <div className="pin" key={index}></div>
             )}
         </div>
-        <div className="chip">
+        {selectedDevice && <div className="chip">
 
             <div className="notch"></div>   
       
             <div className="label">{selectedDevice}</div>
-        </div>
+        </div>}
 
       </div>
 

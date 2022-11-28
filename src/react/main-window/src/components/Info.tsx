@@ -16,6 +16,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
   const [filteredDevices, setFilteredDevices] = useState([]);
   const [filter, setFilter] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("");
+  const [chipInfo, setChipInfo] = useState({});
 
   useEffect(() => {
     getSupportedDevices(setDevices, setSelectedDevice);
@@ -25,10 +26,21 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
     const _filteredDevices = devices.filter((device: string) => {
       return device.toLowerCase().includes(filter.toLowerCase()); 
     });
+    const _selectedDevice = _filteredDevices[0];
     setFilteredDevices(_filteredDevices);
-    setSelectedDevice(_filteredDevices[0]);
-    setOptions({...options, selectedDevice: _filteredDevices[0]});
+    setSelectedDevice(_selectedDevice);
+    setOptions({...options, selectedDevice: _selectedDevice});
+    (async() => {
+      if (_selectedDevice) setChipInfo(await getInfo(selectedDevice, setTerminalText, terminalText))
+    })();
   }, [devices, filter]);
+
+  useEffect(() => {
+    setOptions({...options, selectedDevice: selectedDevice});
+    (async() => {
+      if (selectedDevice) setChipInfo(await getInfo(selectedDevice, setTerminalText, terminalText))
+    })();
+  }, [selectedDevice]);
   
 
   return (
@@ -51,6 +63,8 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
           console.log(await getInfo(selectedDevice, setTerminalText, terminalText))
           
           }}>Info</button>
+
+        <>{JSON.stringify(chipInfo)}</>
 
 
 
