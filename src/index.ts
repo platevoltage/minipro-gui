@@ -16,6 +16,9 @@ app.whenReady().then(() => {
     ipcMain.handle("getSupportedDevices", async () => {
       return listDevices();
     });
+    ipcMain.handle("getInfo", async (_, device) => {
+      return getDeviceInfo(device);
+    });
 
 });
 
@@ -47,8 +50,10 @@ async function listDevices() {
 }
 
 async function getDeviceInfo(device: string) {
-    const { stderr } = await exec(`minipro -d ${device} -q TL866A`);
+  const execString = `minipro -d ${device} -q TL866A`
+    const { stderr } = await exec(execString);
     console.log(stderr);
+    return { stderr, execString };
 }
 
 async function readDevice(device: string, force?: boolean) {

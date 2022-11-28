@@ -22,7 +22,7 @@ function App() {
   const [terminalText, setTerminalText] = useState("");
   const [options, setOptions] = useState<IOptions>({
     selectedDevice: "",
-    isForced: true,
+    isForced: false,
   });
 
 
