@@ -21,10 +21,11 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
   useEffect(() => {
     getSupportedDevices(setDevices, setSelectedDevice);
   }, []);
+
   useEffect(() => {
     (async() => {
       if (selectedDevice) {
-        const chipInfo = await getInfo(selectedDevice, setTerminalText, terminalText)
+        const chipInfo = await getInfo(selectedDevice)
         setChipInfo(chipInfo);
         setOptions({...options, selectedDevice: selectedDevice, chipInfo});
       } else {
@@ -42,7 +43,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
     setSelectedDevice(_selectedDevice);
     (async() => {
       if (selectedDevice) {
-        const chipInfo = await getInfo(selectedDevice, setTerminalText, terminalText)
+        const chipInfo = await getInfo(selectedDevice)
         setChipInfo(chipInfo);
         setOptions({...options, selectedDevice: _selectedDevice, chipInfo});
       } else {
