@@ -37,13 +37,11 @@ function App() {
         <HexWindow file={hexEditorFile}/>
         <TerminalWindow text={terminalText}/>
         <div className="programmer-container">
-          <TL866 selectedDevice={options.selectedDevice}/>
+          <TL866 options={options}/>
         </div>
       </div>
       <Options options={options} setOptions={setOptions}/>
-      {/* <div className="programmer-container"> */}
-        {/* <TL866 /> */}
-      {/* </div> */}
+
     </main>
   );
 }

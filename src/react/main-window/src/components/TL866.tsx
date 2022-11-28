@@ -1,11 +1,12 @@
 import React from 'react'
 import "./TL866.css";
+import { IOptions } from './Options';
 
 interface Props {
-  selectedDevice: string;
+  options: IOptions;
 }
 
-export default function TL866({selectedDevice}:Props) {
+export default function TL866({options}:Props) {
   return (
     <div className="body">
       <div className="zif">
@@ -19,11 +20,11 @@ export default function TL866({selectedDevice}:Props) {
                 <div className="pin" key={index}></div>
             )}
         </div>
-        {selectedDevice && <div className="chip">
+        {options.selectedDevice && <div className={`chip ${options.chipInfo?.Package}`}>
 
             <div className="notch"></div>   
       
-            <div className="label">{selectedDevice}</div>
+            <div className="label">{options.selectedDevice.split("@")[0]}</div>
         </div>}
 
       </div>

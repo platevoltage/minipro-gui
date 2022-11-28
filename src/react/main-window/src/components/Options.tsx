@@ -9,7 +9,17 @@ interface Props {
 
 export interface IOptions {
   isForced: boolean,
-  selectedDevice: string
+  selectedDevice: string,
+  chipInfo?: IChipInfo,
+}
+interface IChipInfo {
+  Name: string,
+  Memory: string,
+  Package: string,
+  ICSP: string,
+  Protocol: string,
+  "Read buffer size": string,
+  "Write buffer size": string
 }
 
 export default function Options({options, setOptions}:Props) {
