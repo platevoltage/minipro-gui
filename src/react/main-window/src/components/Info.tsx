@@ -76,7 +76,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
           
           }}>Info</button>
 
-        <>{JSON.stringify(chipInfo)}</>
+        {/* <>{JSON.stringify(chipInfo)}</> */}
 
 
 
