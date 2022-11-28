@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getSupportedDevices, readDevice, getInfo, getPackageType } from '../utils/api';
+import { getSupportedDevices, readDevice, getInfo } from '../utils/api';
 import { IOptions } from './Options';
 import './Info.css';
 
@@ -26,7 +26,6 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
     (async() => {
       if (selectedDevice) {
         const chipInfo = await getInfo(selectedDevice)
-
         setOptions({...options, selectedDevice: selectedDevice, chipInfo});
       } else {
         setOptions({...options, selectedDevice: selectedDevice, chipInfo: null});
@@ -44,7 +43,6 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
     (async() => {
       if (selectedDevice) {
         const chipInfo = await getInfo(selectedDevice)
-
         setOptions({...options, selectedDevice: _selectedDevice, chipInfo});
       } else {
         setOptions({...options, selectedDevice: _selectedDevice, chipInfo: null});

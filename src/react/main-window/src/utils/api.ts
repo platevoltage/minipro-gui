@@ -40,6 +40,7 @@ export function readDevice(selectedDevice: string, isForced: boolean, setHexEdit
         newText +=  result.execString + "\n";
         if (!("err" in result)) {
             setHexEditorFile(result.file);
+            console.log(result.file);
             newText += "done \n\n";
         } else {
             newText += result.err + "\n";
