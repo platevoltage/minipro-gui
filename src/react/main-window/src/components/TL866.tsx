@@ -7,17 +7,23 @@ interface Props {
 }
 
 export default function TL866({options}:Props) {
+  const pinCount = +(options.chipInfo?.Package.match(/\d/g)!.join("") || 0)/2;
+  console.log(options.chipInfo?.Package.match(/\d/g)!.join(""), pinCount)
   return (
     <div className="body">
       <div className="zif">
         <div className="pin-row left">
             {[...Array(20)].map((_, index) =>
-                <div className="pin" key={index}></div>
+                <div className="pin left" key={index}>
+                  {index<pinCount && <div className={`occupied-pin ${options.chipInfo?.Package}`}></div>}
+                </div>
             )}
         </div>
         <div className="pin-row right">
             {[...Array(20)].map((_, index) =>
-                <div className="pin" key={index}></div>
+                <div className="pin right" key={index}>
+                  {index<pinCount && <div className={`occupied-pin ${options.chipInfo?.Package}`}></div>}
+                </div>
             )}
         </div>
         {options.selectedDevice && <div className={`chip ${options.chipInfo?.Package}`}>
