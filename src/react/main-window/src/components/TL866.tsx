@@ -7,7 +7,10 @@ interface Props {
 }
 
 export default function TL866({options}:Props) {
-  const pinCount = +(options.chipInfo?.Package.match(/\d/g)!.join("") || 0)/2;
+  const packageType = options.chipInfo?.Package;
+  const pinCount = +(options.chipInfo?.Package.match(/\d/g)!.join("") || 0) / 2;
+
+
   console.log(options.chipInfo?.Package.match(/\d/g)!.join(""), pinCount)
   return (
     <div className="body">
@@ -15,18 +18,18 @@ export default function TL866({options}:Props) {
         <div className="pin-row left">
             {[...Array(20)].map((_, index) =>
                 <div className="pin left" key={index}>
-                  {index<pinCount && <div className={`occupied-pin ${options.chipInfo?.Package}`}></div>}
+                  {index<pinCount && <div className={`occupied-pin ${packageType}`}></div>}
                 </div>
             )}
         </div>
         <div className="pin-row right">
             {[...Array(20)].map((_, index) =>
                 <div className="pin right" key={index}>
-                  {index<pinCount && <div className={`occupied-pin ${options.chipInfo?.Package}`}></div>}
+                  {index<pinCount && <div className={`occupied-pin ${packageType}`}></div>}
                 </div>
             )}
         </div>
-        {options.selectedDevice && <div className={`chip ${options.chipInfo?.Package}`}>
+        {options.selectedDevice && <div className={`chip ${packageType}`}>
 
             <div className="notch"></div>   
             <div className="dot"></div>   
