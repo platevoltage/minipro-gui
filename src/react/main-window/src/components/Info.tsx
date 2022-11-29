@@ -10,13 +10,14 @@ interface Props {
   setOptions: Function;
   options: IOptions;
   hexEditorFile: Buffer;
+  setSelectedDevice: Function;
+  selectedDevice: string;
 }
 
-export default function Info({setHexEditorFile, hexEditorFile, setTerminalText, terminalText, setOptions, options}: Props) {
+export default function Info({setHexEditorFile, hexEditorFile, setTerminalText, terminalText, setOptions, options, setSelectedDevice, selectedDevice}: Props) {
   const [devices, setDevices] = useState([]);
   const [filteredDevices, setFilteredDevices] = useState([]);
   const [filter, setFilter] = useState("");
-  const [selectedDevice, setSelectedDevice] = useState("");
 
   const memoizedMenu = useMemo(() => {
     return (<>
@@ -81,7 +82,7 @@ export default function Info({setHexEditorFile, hexEditorFile, setTerminalText, 
           
           }}>Info</button>
 
-        <button onClick={() => writeDevice(hexEditorFile, selectedDevice, options.isForced, setTerminalText, terminalText)}>Write</button>
+        {/* <button onClick={() => writeDevice(hexEditorFile, selectedDevice, options.isForced, setTerminalText, terminalText)}>Write</button> */}
 
     </div>
   )

@@ -8,10 +8,12 @@ interface Props {
     hexEditorFile: Buffer;
     setTerminalText: Function;
     terminalText: string;
+    setShowWriteDialog: Function;
+    showWriteDialog: boolean;
 }
 
 
-export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, terminalText}: Props) {
+export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, terminalText, showWriteDialog, setShowWriteDialog}: Props) {
   const fileUploadRef = useRef<HTMLInputElement>(null);
   
 
@@ -45,6 +47,7 @@ export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, t
       </input>
       
       <button onClick={() => saveFile(hexEditorFile)}>Save</button>
+      <button onClick={() => setShowWriteDialog(!showWriteDialog)}>Write</button>
       
 
 

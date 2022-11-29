@@ -2,11 +2,12 @@
 import './App.css';
 import TL866 from './components/TL866';
 import HexWindow from './components/HexWindow';
+import WriteDialog from './components/WriteDialog';
 import Nav from './components/Nav';
 import Info from './components/Info';
 import Divider from './components/Divider';
 import Options, { IOptions } from './components/Options';
-import { MutableRefObject, useEffect, useRef, useState, MouseEvent } from 'react';
+import { MutableRefObject, useRef, useState, MouseEvent } from 'react';
 import { Buffer } from 'buffer';
 import TerminalWindow from './components/TerminalWindow';
 
@@ -38,6 +39,8 @@ function App() {
   const [updateHexWindowWidth, setUpdateHexWindowWidth] = useState({});
   const [terminalWidth, setTerminalWidth] = useState(500);
   const [programmerWidth, setProgrammerWidth] = useState(500);
+  const [showWriteDialog, setShowWriteDialog] = useState(false);
+  const [selectedDevice, setSelectedDevice] = useState("");
 
 
   const handleDrag = (e: MouseEvent<HTMLDivElement>, element: string) => {
@@ -78,17 +81,19 @@ function App() {
 
   return (
     <main style={{cursor}}>
-      <Nav setHexEditorFile={setHexEditorFile} hexEditorFile={hexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText}/>
-      <Info setHexEditorFile={setHexEditorFile} hexEditorFile={hexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText} setOptions={setOptions} options={options}/>
+      <Nav setHexEditorFile={setHexEditorFile} hexEditorFile={hexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText} setShowWriteDialog={setShowWriteDialog} showWriteDialog={showWriteDialog}/>
+      <Info setHexEditorFile={setHexEditorFile} hexEditorFile={hexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText} setOptions={setOptions} options={options} setSelectedDevice={setSelectedDevice} selectedDevice={selectedDevice}/>
 
       <div className="row" ref={rowRef}>
 
         <div className="hex-container" style={{width: `${hexWidth}px`}} ref={hexRef}>
-          <HexWindow file={hexEditorFile} width={hexWidth} update={updateHexWindowWidth}/>
+          { showWriteDialog ?
+              <WriteDialog file={hexEditorFile} selectedDevice={selectedDevice} setTerminalText={setTerminalText} terminalText={terminalText} options={options}/> :
+              <HexWindow file={hexEditorFile} width={hexWidth} update={updateHexWindowWidth}/> 
+          }
         </div>
         <Divider handleDrag={handleDrag} component="hex" width={dividerWidth} />
         
-          {/* <div draggable style={{height: '100%', width: "10px", backgroundColor: "blue"}} onMouseDown={(e) => handleDrag(e, "hex")}></div> */}
 
         <div className="terminal-container" style={{width: `${terminalWidth}px`}} ref={terminalRef}>
           <TerminalWindow text={terminalText}/>
