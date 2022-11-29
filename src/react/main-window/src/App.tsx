@@ -48,16 +48,18 @@ function App() {
     const rowWidth = rowRef.current.getBoundingClientRect().width;
     
     const mouseMove = (e: {clientX: number}) => {
+
       setCursor("col-resize");
       switch (element) {
         case "hex": 
           setHexWidth(e.clientX+dividerWidth); 
-          setTerminalWidth(rowWidth-e.clientX-programmerWidth-dividerWidth*2);
+          if (e.clientX >=0) setTerminalWidth(rowWidth-e.clientX-programmerWidth-dividerWidth);
           break;
         case "terminal": 
-          setTerminalWidth(e.clientX - hexWidth+dividerWidth); 
-          setProgrammerWidth(rowWidth-e.clientX-dividerWidth*2)
+          setProgrammerWidth(rowWidth-e.clientX-dividerWidth)
+          if (e.clientX < rowWidth - 30) setTerminalWidth(e.clientX - hexWidth+dividerWidth); 
           break;
+      
       }
     }
     const mouseUp = () => {
@@ -80,15 +82,15 @@ function App() {
 
         <div className="hex-container" style={{width: `${hexWidth}px`}} ref={hexRef}>
           <HexWindow file={hexEditorFile}/>
-        <Divider handleDrag={handleDrag} component="hex" width={dividerWidth} />
         </div>
+        <Divider handleDrag={handleDrag} component="hex" width={dividerWidth} />
         
           {/* <div draggable style={{height: '100%', width: "10px", backgroundColor: "blue"}} onMouseDown={(e) => handleDrag(e, "hex")}></div> */}
 
         <div className="terminal-container" style={{width: `${terminalWidth}px`}} ref={terminalRef}>
           <TerminalWindow text={terminalText}/>
-        <Divider handleDrag={handleDrag} component="terminal" width={dividerWidth} />
         </div>
+        <Divider handleDrag={handleDrag} component="terminal" width={dividerWidth} />
 
 
         <div className="programmer-container" style={{width: `${programmerWidth}px`}} ref={programmerRef}>
