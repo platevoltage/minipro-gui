@@ -24,6 +24,7 @@ function App() {
   const dividerWidth = 10;
 
   const [terminalText, setTerminalText] = useState("");
+  const [cursor, setCursor] = useState("default");
   const [options, setOptions] = useState<IOptions>({
     selectedDevice: "",
     isForced: false,
@@ -47,6 +48,7 @@ function App() {
     const rowWidth = rowRef.current.getBoundingClientRect().width;
     
     const mouseMove = (e: {clientX: number}) => {
+      setCursor("col-resize");
       switch (element) {
         case "hex": 
           setHexWidth(e.clientX+dividerWidth); 
@@ -61,6 +63,7 @@ function App() {
     const mouseUp = () => {
       document.removeEventListener('mousemove', mouseMove);
       document.removeEventListener('mouseup', mouseUp);
+      setCursor("default");
     }
     document.addEventListener('mousemove', mouseMove);
     document.addEventListener('mouseup', mouseUp);
@@ -69,7 +72,7 @@ function App() {
 
 
   return (
-    <main>
+    <main style={{cursor}}>
       <Nav setHexEditorFile={setHexEditorFile} hexEditorFile={hexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText}/>
       <Info setHexEditorFile={setHexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText} setOptions={setOptions} options={options}/>
 
