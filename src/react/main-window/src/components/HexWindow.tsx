@@ -21,7 +21,7 @@ export default function HexWindow({ file }: Props) {
     }, [data]);
 
   return (
-    <div className="hex-window-container">
+    <div style={{height: "100%", width: "100%"}}>
 
         <HexEditor
             // columns={0x10}

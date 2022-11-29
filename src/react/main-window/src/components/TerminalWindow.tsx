@@ -18,7 +18,7 @@ export default function TerminalWindow({text}: Props) {
 
 
   return (
-    <div ref={containerRef} id="terminal-container">
+    <div ref={containerRef} style={{width: "100%"}}>
         
       <div ref={bottomRef}>
       <pre><code>
