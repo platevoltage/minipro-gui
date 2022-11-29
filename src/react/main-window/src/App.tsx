@@ -73,13 +73,13 @@ function App() {
 
         <div className="hex-container" style={{width: `${hexWidth}px`}} ref={hexRef}>
           <HexWindow file={hexEditorFile}/>
-          <div draggable style={{height: '100%', width: "10px", backgroundColor: "blue"}} onMouseDown={(e) => handleMouseDown(e, "hex")}></div>
         </div>
+          <div draggable style={{height: '100%', width: "10px", backgroundColor: "blue"}} onMouseDown={(e) => handleMouseDown(e, "hex")}></div>
 
         <div className="terminal-container" style={{width: `${terminalWidth}px`}} ref={terminalRef}>
           <TerminalWindow text={terminalText}/>
-          <div draggable style={{height: '100%', width: "10px", backgroundColor: "blue"}} onMouseDown={(e) => handleMouseDown(e, "terminal")}></div>
         </div>
+          <div draggable style={{height: '100%', width: "10px", backgroundColor: "blue"}} onMouseDown={(e) => handleMouseDown(e, "terminal")}></div>
 
         <div className="programmer-container" style={{width: `${programmerWidth}px`}} ref={programmerRef}>
           <TL866 options={options}/>

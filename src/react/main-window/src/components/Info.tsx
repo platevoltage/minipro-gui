@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { getSupportedDevices, readDevice, getInfo } from '../utils/api';
 import { IOptions } from './Options';
 import './Info.css';
@@ -10,6 +10,17 @@ interface Props {
   setOptions: Function;
   options: IOptions;
 }
+interface MenuProps {
+  filteredDevices: Array<string>;
+}
+
+function Menu({ filteredDevices }:MenuProps) {
+  return <>
+  {filteredDevices.map((device: any, index: number) => {
+    return <option key={index} value={device}>{device}</option>
+  })}
+  </>
+}
 
 export default function Info({setHexEditorFile, setTerminalText, terminalText, setOptions, options}: Props) {
   const [devices, setDevices] = useState([]);
@@ -17,7 +28,11 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
   const [filter, setFilter] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("");
 
+  const memoizedMenu = useMemo(() => {
+    return <Menu filteredDevices={filteredDevices}/>;
+  }, [filteredDevices])
 
+  console.log("load")
   useEffect(() => {
     getSupportedDevices(setDevices, setSelectedDevice);
   }, []);
@@ -56,10 +71,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
  
         <select id="chip-select" name="chip-select" onChange={(e) => setSelectedDevice(e.target.value)} value={selectedDevice}>
           <>{ filteredDevices.length>0 ?
-
-                filteredDevices.map((device: any, index: number) => {
-                  return <option key={index} value={device}>{device}</option>
-                })
+                <>{memoizedMenu}</>
                 :
                 <option>No Matches</option>
 
