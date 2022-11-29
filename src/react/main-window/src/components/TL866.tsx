@@ -11,21 +11,21 @@ export default function TL866({options}:Props) {
   const pinCount = +(options.chipInfo?.Package.match(/\d/g)!.join("") || 0) / 2;
 
 
-  // console.log(options.chipInfo?.Package.match(/\d/g)!.join(""), pinCount)
+  console.log(packageType, pinCount, options)
   return (
     <div className="body">
       <div className="zif">
         <div className="pin-row left">
             {[...Array(20)].map((_, index) =>
                 <div className="pin left" key={index}>
-                  {index<pinCount && <div className={`occupied-pin ${packageType}`}></div>}
+                  {index<pinCount && options.selectedDevice && <div className={`occupied-pin ${packageType}`}></div>}
                 </div>
             )}
         </div>
         <div className="pin-row right">
             {[...Array(20)].map((_, index) =>
                 <div className="pin right" key={index}>
-                  {index<pinCount && <div className={`occupied-pin ${packageType}`}></div>}
+                  {index<pinCount && options.selectedDevice && <div className={`occupied-pin ${packageType}`}></div>}
                 </div>
             )}
         </div>
