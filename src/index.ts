@@ -94,6 +94,7 @@ async function writeDevice(file: Buffer, device: string, force?: boolean) {
 async function readFile(path: string, encoding?: BufferEncoding | null) {
   try {
     const data = await fs.promises.readFile(path, { encoding })
+    
     return data;
   }
   catch (err) {
