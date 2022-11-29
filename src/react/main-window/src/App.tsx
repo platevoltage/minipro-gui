@@ -35,6 +35,7 @@ function App() {
   );
 
   const [hexWidth, setHexWidth] = useState(500);
+  const [updateHexWindowWidth, setUpdateHexWindowWidth] = useState({});
   const [terminalWidth, setTerminalWidth] = useState(500);
   const [programmerWidth, setProgrammerWidth] = useState(500);
 
@@ -42,10 +43,10 @@ function App() {
   const handleDrag = (e: MouseEvent<HTMLDivElement>, element: string) => {
     e.preventDefault();
 
-    const programmerWidth = programmerRef.current.getBoundingClientRect().width;
-    const hexWidth = hexRef.current.getBoundingClientRect().width;
+    const _programmerWidth = programmerRef.current.getBoundingClientRect().width;
+    const _hexWidth = hexRef.current.getBoundingClientRect().width;
     // const terminalWidth = terminalRef.current.getBoundingClientRect().width;
-    const rowWidth = rowRef.current.getBoundingClientRect().width;
+    const _rowWidth = rowRef.current.getBoundingClientRect().width;
     
     const mouseMove = (e: {clientX: number}) => {
 
@@ -53,19 +54,21 @@ function App() {
       switch (element) {
         case "hex": 
           setHexWidth(e.clientX+dividerWidth); 
-          if (e.clientX >=0) setTerminalWidth(rowWidth-e.clientX-programmerWidth-dividerWidth);
+          if (e.clientX >=0) setTerminalWidth(_rowWidth-e.clientX-_programmerWidth-dividerWidth);
           break;
         case "terminal": 
-          setProgrammerWidth(rowWidth-e.clientX-dividerWidth)
-          if (e.clientX < rowWidth - 30) setTerminalWidth(e.clientX - hexWidth+dividerWidth); 
+          setProgrammerWidth(_rowWidth-e.clientX-dividerWidth)
+          if (e.clientX < _rowWidth - 30) setTerminalWidth(e.clientX - _hexWidth+dividerWidth); 
           break;
       
       }
     }
+
     const mouseUp = () => {
       document.removeEventListener('mousemove', mouseMove);
       document.removeEventListener('mouseup', mouseUp);
       setCursor("default");
+      setUpdateHexWindowWidth({});
     }
     document.addEventListener('mousemove', mouseMove);
     document.addEventListener('mouseup', mouseUp);
@@ -81,7 +84,7 @@ function App() {
       <div className="row" ref={rowRef}>
 
         <div className="hex-container" style={{width: `${hexWidth}px`}} ref={hexRef}>
-          <HexWindow file={hexEditorFile}/>
+          <HexWindow file={hexEditorFile} width={hexWidth} update={updateHexWindowWidth}/>
         </div>
         <Divider handleDrag={handleDrag} component="hex" width={dividerWidth} />
         
