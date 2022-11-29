@@ -10,17 +10,6 @@ interface Props {
   setOptions: Function;
   options: IOptions;
 }
-interface MenuProps {
-  filteredDevices: Array<string>;
-}
-
-function Menu({ filteredDevices }:MenuProps) {
-  return <>
-  {filteredDevices.map((device: any, index: number) => {
-    return <option key={index} value={device}>{device}</option>
-  })}
-  </>
-}
 
 export default function Info({setHexEditorFile, setTerminalText, terminalText, setOptions, options}: Props) {
   const [devices, setDevices] = useState([]);
@@ -29,7 +18,11 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
   const [selectedDevice, setSelectedDevice] = useState("");
 
   const memoizedMenu = useMemo(() => {
-    return <Menu filteredDevices={filteredDevices}/>;
+    return (<>
+      {filteredDevices.map((device: any, index: number) => {
+        return <option key={index} value={device}>{device}</option>
+      })}
+    </>)
   }, [filteredDevices])
 
   console.log("load")
