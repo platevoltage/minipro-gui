@@ -1,2 +1,5 @@
 test.hex
 temp.hex
+test.eeprom.bin
+test.fuses.conf
+fuse.txt

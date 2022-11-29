@@ -14,6 +14,7 @@ export default function WriteDialog({file, selectedDevice, options, setTerminalT
   return (
     <div>
       <button onClick={() => writeDevice(file, selectedDevice, options.isForced, setTerminalText, terminalText)}>Write</button>
+      {JSON.stringify(options)}
     </div>
   )
 }
