@@ -45,6 +45,7 @@ export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, t
       </input>
       
       <button onClick={() => saveFile(hexEditorFile)}>Save</button>
+      
 
 
 

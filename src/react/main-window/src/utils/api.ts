@@ -48,10 +48,27 @@ export function readDevice(selectedDevice: string, isForced: boolean, setHexEdit
         setTerminalText(terminalText + newText);
     });
 }
+export function writeDevice(file: Buffer, selectedDevice: string, isForced: boolean, setTerminalText: Function, terminalText: string) {
+    window.api.writeData(file, selectedDevice, isForced).then((result: any) => {
+        let newText = "";
+        console.log(result);
+        newText +=  result.execString + "\n";
+        if (!("err" in result)) {
+            // setHexEditorFile(result.file);
+            // console.log(result.file);
+            newText += "done \n\n";
+        } else {
+            newText += result.err + "\n";
+        }
+        setTerminalText(terminalText + newText);
+    });
+}
 
 export function saveFile(file: Buffer) {
     window.api.saveFile(file).then((result: any) => {});
 }
+
+
 
 function parseJSON(input: string) {
     const lines = input.split("\n");

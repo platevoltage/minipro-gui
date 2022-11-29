@@ -13,6 +13,10 @@ app.whenReady().then(() => {
       console.log(device, force)
       return readDevice(device, force);
     });
+    ipcMain.handle("writeData", async (_, file, device, force) => {
+      console.log(device, force)
+      return writeDevice(file, device, force);
+    });
     ipcMain.handle("getSupportedDevices", async () => {
       return listDevices();
     });
@@ -68,6 +72,19 @@ async function readDevice(device: string, force?: boolean) {
     const { stdout, stderr } = await exec(execString);
     const file = await readFile("test.hex");
     return {stdout, stderr, file, execString};
+  } catch(err) {
+    return { err, execString };
+  }
+    
+}
+
+async function writeDevice(file: Buffer, device: string, force?: boolean) {
+  await saveFile("temp.hex", file);
+  const execString = `minipro -p ${device} -w temp.hex ${force? "-y" : ""}`
+  try {
+    const { stdout, stderr } = await exec(execString);
+    // const file = await readFile("test.hex");
+    return {stdout, stderr, execString};
   } catch(err) {
     return { err, execString };
   }

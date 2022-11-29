@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { getSupportedDevices, readDevice, getInfo } from '../utils/api';
+import { getSupportedDevices, readDevice, getInfo, writeDevice } from '../utils/api';
 import { IOptions } from './Options';
 import './Info.css';
 
@@ -9,9 +9,10 @@ interface Props {
   terminalText: string;
   setOptions: Function;
   options: IOptions;
+  hexEditorFile: Buffer;
 }
 
-export default function Info({setHexEditorFile, setTerminalText, terminalText, setOptions, options}: Props) {
+export default function Info({setHexEditorFile, hexEditorFile, setTerminalText, terminalText, setOptions, options}: Props) {
   const [devices, setDevices] = useState([]);
   const [filteredDevices, setFilteredDevices] = useState([]);
   const [filter, setFilter] = useState("");
@@ -79,6 +80,8 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
           console.log(await getInfo(selectedDevice, setTerminalText, terminalText))
           
           }}>Info</button>
+
+        <button onClick={() => writeDevice(hexEditorFile, selectedDevice, options.isForced, setTerminalText, terminalText)}>Write</button>
 
     </div>
   )
