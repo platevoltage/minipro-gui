@@ -31,7 +31,7 @@ main {
 }
 
 .terminal-container {
-    /* transition: all .3s; */
+    /* transition: all .1s; */
     height: 100%;
     /* width: 100%; */
     background-color: #000000;
@@ -43,7 +43,7 @@ main {
 }
 
 .hex-container {
-  /* transition: all .3s; */
+  /* transition: all .1s; */
   height: 100%;
   /* width: 70%; */
   background-color: #ffffff33;
