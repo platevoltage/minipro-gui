@@ -82,8 +82,6 @@ export default function Info({setHexEditorFile, hexEditorFile, setTerminalText, 
           
           }}>Info</button>
 
-        {/* <button onClick={() => writeDevice(hexEditorFile, selectedDevice, options.isForced, setTerminalText, terminalText)}>Write</button> */}
-
     </div>
   )
 }
