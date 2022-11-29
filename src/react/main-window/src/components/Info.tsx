@@ -25,7 +25,7 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
     </>)
   }, [filteredDevices])
 
-  console.log("load")
+
   useEffect(() => {
     getSupportedDevices(setDevices, setSelectedDevice);
   }, []);
@@ -79,13 +79,6 @@ export default function Info({setHexEditorFile, setTerminalText, terminalText, s
           console.log(await getInfo(selectedDevice, setTerminalText, terminalText))
           
           }}>Info</button>
-
-        {/* <>{JSON.stringify(chipInfo)}</> */}
-
-
-
-
-
 
     </div>
   )
