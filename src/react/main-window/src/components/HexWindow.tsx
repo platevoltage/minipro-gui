@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function HexWindow({ file }: Props) {
-    const data = file;
+    const data = useMemo(() => file, [file]);
     // `data` contains the bytes to show. It can also be `Uint8Array`!
     // const data = useMemo(() => file.split("").map((byte) => byte.charCodeAt(0)), []);
     // If `data` is large, you probably want it to be mutable rather than cloning it over and over.
