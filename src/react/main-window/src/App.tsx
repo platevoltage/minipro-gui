@@ -11,6 +11,8 @@ import { MutableRefObject, useRef, useState, MouseEvent } from 'react';
 import { Buffer } from 'buffer';
 import TerminalWindow from './components/TerminalWindow';
 
+const dividerWidth = 4;
+
 declare global {
   interface Window {
       api? : any
@@ -22,7 +24,6 @@ function App() {
   const terminalRef = useRef() as MutableRefObject<HTMLDivElement>;
   const programmerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const rowRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const dividerWidth = 10;
 
   const [terminalText, setTerminalText] = useState("");
   const [cursor, setCursor] = useState("default");
