@@ -31,6 +31,7 @@ export default function HexWindow({ file }: Props) {
             theme={{ hexEditor: oneDarkPro }}
             showAscii={true}
             showRowLabels={true}
+            overscanCount={10}
             />
     </div>
     

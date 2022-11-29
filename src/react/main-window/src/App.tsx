@@ -16,21 +16,25 @@ declare global {
 }
 
 function App() {
-  const [hexEditorFile, setHexEditorFile] = useState(
-    Buffer.allocUnsafe(512).fill(Buffer.from('00','hex'))
-  );
+  
   const [terminalText, setTerminalText] = useState("");
   const [options, setOptions] = useState<IOptions>({
     selectedDevice: "",
     isForced: false,
   });
+  const memory = +(options.chipInfo?.Memory.split(" ")[1] || 0);
+  const [hexEditorFile, setHexEditorFile] = useState(
+    Buffer.allocUnsafe(256).fill(Buffer.from('00','hex'))
+  );
 
+  // useEffect(() => {
+  //   setHexEditorFile(Buffer.allocUnsafe(memory).fill(Buffer.from('00','hex')))
+  // },[memory])
 
 
 
   return (
     <main>
-
       <Nav setHexEditorFile={setHexEditorFile} hexEditorFile={hexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText}/>
       <Info setHexEditorFile={setHexEditorFile} setTerminalText={setTerminalText} terminalText={terminalText} setOptions={setOptions} options={options}/>
       <div className="row">

@@ -11,7 +11,7 @@ export default function TL866({options}:Props) {
   const pinCount = +(options.chipInfo?.Package.match(/\d/g)!.join("") || 0) / 2;
 
 
-  console.log(options.chipInfo?.Package.match(/\d/g)!.join(""), pinCount)
+  // console.log(options.chipInfo?.Package.match(/\d/g)!.join(""), pinCount)
   return (
     <div className="body">
       <div className="zif">
