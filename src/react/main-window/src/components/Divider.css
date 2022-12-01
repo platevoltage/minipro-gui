@@ -1,6 +1,19 @@
 .divider {
+    position: absolute;
     height: 100%;
-    background-color: #555555;
+    background-color: #55555500;
     cursor: col-resize;
+    width: 2px;
 }
 
+.divider:hover {
+    left: -2px;
+    width: 4px;
+    background-color: #555555;
+}
+
+.divider:active {
+    left: -2px;
+    width: 4px;
+    background-color: #dddddd;
+}

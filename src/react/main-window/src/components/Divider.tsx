@@ -9,8 +9,11 @@ interface Props {
 
 export default function Divider({handleDrag, component, width}: Props) {
   return (
-    
-      <div style={{width: `${width}px`}} className="divider" draggable onMouseDown={(e) => handleDrag(e, component)}></div>
+    <div style={{position: 'relative'}}>
+
+      <div className="divider" draggable onMouseDown={(e) => handleDrag(e, component)}></div>
+
+    </div>
     
   )
 }
