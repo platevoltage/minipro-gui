@@ -20,7 +20,7 @@ export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, t
   return (
     <div className="nav-container">
       {/* <button>Open File</button> */}
-      <label className="button" htmlFor="file"><i className="bi bi-folder2-open"></i></label>
+      <label className="button file-upload" htmlFor="file"><i className="bi bi-folder2-open"></i></label>
       <input hidden
        ref={fileUploadRef} 
        type="file"

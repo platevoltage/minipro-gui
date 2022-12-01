@@ -1,9 +1,18 @@
 .nav-container {
-    height: 60px;
+    height: 70px;
     background-color: #ffffff22
 }
 
+file-upload {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+}
+
 .button, button {
+    transition: background-color .5s;
     background-color: #00000000;
     color: white;
     padding: 0.5rem;
@@ -13,10 +22,21 @@
     cursor: pointer;
     /* margin-top: 1rem; */
     border: none;
+    margin: 4px;
+}
+
+.file-upload {
+    padding-top: 1.85rem;
+    padding-bottom: .8rem;
 }
 
 .button:hover, button:hover {
     background-color: #00000066;
+}
+
+.button:active, button:active {
+    transition: background-color .1s;
+    background-color: #ffffff33;
 }
 
 i {
