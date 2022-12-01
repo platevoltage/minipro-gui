@@ -32,7 +32,7 @@ export async function getInfo(selectedDevice: string, setTerminalText?: Function
     }); 
 
 }
-
+//figure out how to read fuse file!!!! don't forget!
 export function readDevice(selectedDevice: string, isForced: boolean, setHexEditorFile: Function, setTerminalText: Function, terminalText: string) {
     window.api.readData(selectedDevice, isForced).then((result: any) => {
         let newText = "";

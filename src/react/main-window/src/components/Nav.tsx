@@ -20,7 +20,7 @@ export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, t
   return (
     <div className="nav-container">
       {/* <button>Open File</button> */}
-      <label className="button" htmlFor="file">Choose File</label>
+      <label className="button" htmlFor="file"><i className="bi bi-folder2-open"></i></label>
       <input hidden
        ref={fileUploadRef} 
        type="file"
@@ -46,8 +46,8 @@ export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, t
         }}>
       </input>
       
-      <button onClick={() => saveFile(hexEditorFile)}>Save</button>
-      <button onClick={() => setShowWriteDialog(!showWriteDialog)}>Write</button>
+      <button onClick={() => saveFile(hexEditorFile)}><i className="bi bi-save"></i></button>
+      <button onClick={() => setShowWriteDialog(!showWriteDialog)}><i className="bi bi-cpu"></i></button>
       
 
 
