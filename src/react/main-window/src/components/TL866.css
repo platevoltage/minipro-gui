@@ -22,6 +22,32 @@
     justify-content: center;
 }
 
+.zif .lock {
+    left: 0;
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-color: #999999;
+}
+
+.zif .post {
+    position: absolute;
+    left: 20%;
+    bottom: 0;
+    width: 40%;
+    height: 260%;
+    background-color: #676767;
+}
+.zif .handle {
+    position: absolute;
+    background-color: #19818b;
+    width: 200%;
+    height: 30%;
+    top: 0;
+    right: -50%;
+    border-radius: 10px;
+}
+
 .pin-row {
     background-color: #00000022;
     position: absolute;

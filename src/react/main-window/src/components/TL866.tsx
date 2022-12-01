@@ -15,6 +15,11 @@ export default function TL866({options}:Props) {
   return (
     <div className="body">
       <div className="zif">
+        <div className="lock">
+          <div className="post">
+            <div className="handle"></div>
+          </div>
+        </div>
         <div className="pin-row left">
             {[...Array(20)].map((_, index) =>
                 <div className="pin left" key={index}>
