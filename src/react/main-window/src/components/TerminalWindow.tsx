@@ -11,9 +11,10 @@ export default function TerminalWindow({text}: Props) {
   useEffect(() => {
 
       const bottom = (bottomRef.current?.getBoundingClientRect().height || 0);
+      console.log(bottom);
       containerRef.current?.scrollTo({top: bottom || 0, behavior: "smooth"});
       
-    }, [text]);
+  }, [text]);
     
 
 
