@@ -12,6 +12,7 @@ file-upload {
 }
 
 .button, button {
+    position: relative;
     transition: background-color .5s;
     background-color: #00000000;
     color: white;
@@ -43,3 +44,9 @@ i {
     font-size: 2.5rem;
 }
 
+.badge {
+    position: absolute;
+    right: 0px;
+    bottom: 5px;
+    font-size: 1em;
+}

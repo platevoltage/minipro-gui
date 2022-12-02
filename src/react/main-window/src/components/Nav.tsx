@@ -49,8 +49,8 @@ export default function Nav({setHexEditorFile, hexEditorFile, setTerminalText, t
        onChange={(e) => handleUpload(e)}>
       </input>
       
-      <button onClick={() => saveFile(hexEditorFile)}><i className="bi bi-save"></i></button>
-      <button onClick={() => setShowWriteDialog(!showWriteDialog)}><i className="bi bi-cpu"></i></button>
+      <button onClick={() => saveFile(hexEditorFile)}><i className="bi bi-file-earmark"></i></button>
+      <button onClick={() => setShowWriteDialog(!showWriteDialog)}><i className="bi bi-cpu"></i><i className="bi bi-arrow-up-left badge"></i></button>
       
     </div>
   )
